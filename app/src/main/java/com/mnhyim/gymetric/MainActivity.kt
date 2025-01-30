@@ -7,11 +7,16 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavBackStackEntry
+import androidx.navigation.NavDestination.Companion.hasRoute
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.mnhyim.gymetric.ui.feature.ExerciseScreen
-import com.mnhyim.gymetric.ui.feature.HomeScreen
+import com.mnhyim.gymetric.ui.component.CustomBottomNavigationBar
 import com.mnhyim.gymetric.ui.navigation.MainNavHost
+import com.mnhyim.gymetric.ui.navigation.Routes
 import com.mnhyim.gymetric.ui.theme.GymetricTheme
 
 class MainActivity : ComponentActivity() {
@@ -21,8 +26,16 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             val navController = rememberNavController()
+            val navBackStackEntry by navController.currentBackStackEntryAsState()
+
             GymetricTheme {
                 Scaffold(
+                    bottomBar = {
+                        CustomBottomNavigationBar(
+                            checkCurrentRoute = { checkCurrentRoute(navBackStackEntry, it) },
+                            onClick = { navController.navigate(it) }
+                        )
+                    },
                     modifier = Modifier.fillMaxSize()
                 ) { _ ->
                     MainNavHost(
@@ -32,4 +45,9 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+}
+
+
+fun checkCurrentRoute(navBackStackEntry: NavBackStackEntry?, route: Routes): Boolean {
+    return navBackStackEntry?.destination?.hierarchy?.any { it.hasRoute(route::class) } ?: false
 }

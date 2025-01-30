@@ -24,5 +24,11 @@ fun MainNavHost(
         composable<Routes.Exercise> {
             ExerciseScreen()
         }
+        composable<Routes.Statistic> {
+
+        }
+        composable<Routes.Settings> {
+
+        }
     }
 }
