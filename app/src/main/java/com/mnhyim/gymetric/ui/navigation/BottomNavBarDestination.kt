@@ -11,10 +11,10 @@ enum class BottomNavBarDestination(
     val route: Routes,
     val icon: ImageVector
 ) {
-    HOME(
-        route = Routes.Home,
-        icon = Icons.Default.Home
-    ),
+//    HOME(
+//        route = Routes.Home,
+//        icon = Icons.Default.Home
+//    ),
     EXERCISE(
         route = Routes.Exercise,
         icon = Icons.Default.FitnessCenter
