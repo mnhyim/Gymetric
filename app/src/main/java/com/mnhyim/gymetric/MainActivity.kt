@@ -8,7 +8,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.rememberNavController
+import com.mnhyim.gymetric.ui.feature.ExerciseScreen
 import com.mnhyim.gymetric.ui.feature.HomeScreen
+import com.mnhyim.gymetric.ui.navigation.MainNavHost
 import com.mnhyim.gymetric.ui.theme.GymetricTheme
 
 class MainActivity : ComponentActivity() {
@@ -17,11 +20,14 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            val navController = rememberNavController()
             GymetricTheme {
                 Scaffold(
                     modifier = Modifier.fillMaxSize()
                 ) { _ ->
-                    HomeScreen()
+                    MainNavHost(
+                        navController = navController
+                    )
                 }
             }
         }

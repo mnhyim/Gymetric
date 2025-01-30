@@ -19,7 +19,7 @@ import com.mnhyim.gymetric.ui.component.ExerciseItem
 import com.mnhyim.gymetric.ui.component.WeeklyDate
 
 @Composable
-fun HomeScreen(
+fun ExerciseScreen(
     modifier: Modifier = Modifier
 ) {
     Scaffold(
@@ -28,7 +28,7 @@ fun HomeScreen(
         },
         modifier = modifier
     ) { innerPadding ->
-        HomeScreenContent(
+        ExerciseScreenContent(
             modifier = Modifier
                 .padding(innerPadding)
                 .padding(16.dp, 8.dp)
@@ -37,7 +37,7 @@ fun HomeScreen(
 }
 
 @Composable
-private fun HomeScreenContent(
+private fun ExerciseScreenContent(
     modifier: Modifier = Modifier
 ) {
     var expanded by remember { mutableStateOf(false) }
