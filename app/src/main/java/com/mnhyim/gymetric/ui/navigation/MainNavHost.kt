@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.mnhyim.gymetric.ui.feature.ExerciseScreen
 import com.mnhyim.gymetric.ui.feature.HomeScreen
+import com.mnhyim.gymetric.ui.feature.SettingsScreen
 
 @Composable
 fun MainNavHost(
@@ -15,7 +16,7 @@ fun MainNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Routes.Home,
+        startDestination = Routes.Exercise,
         modifier = modifier
     ) {
         composable<Routes.Home> {
@@ -28,7 +29,7 @@ fun MainNavHost(
 
         }
         composable<Routes.Settings> {
-
+            SettingsScreen()
         }
     }
 }

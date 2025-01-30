@@ -1,7 +1,9 @@
 package com.mnhyim.gymetric.ui.component
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -11,6 +13,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -29,11 +32,15 @@ fun ExerciseItem(
     onExpand: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    OutlinedCard {
+    OutlinedCard(
+        colors = CardDefaults.outlinedCardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
+        ),
+        border = BorderStroke(1.dp, Color.Transparent)
+    ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = modifier
-                .background(MaterialTheme.colorScheme.surfaceContainerLow)
                 .fillMaxWidth()
                 .padding(12.dp, 12.dp, 8.dp, 12.dp)
         ) {
@@ -44,7 +51,7 @@ fun ExerciseItem(
                     modifier = Modifier
                         .padding(bottom = 4.dp)
                         .background(
-                            MaterialTheme.colorScheme.surfaceDim,
+                            MaterialTheme.colorScheme.surfaceContainerLow,
                             RoundedCornerShape(8.dp)
                         )
                         .padding(8.dp, 4.dp)
@@ -69,10 +76,19 @@ fun ExerciseItem(
             visible = expanded
         ) {
             Column(
-                modifier = Modifier.padding(8.dp, 8.dp, 8.dp, 8.dp)
+                modifier = Modifier
+                    .padding(8.dp, 8.dp, 8.dp, 8.dp)
+                    .border(
+                        1.dp,
+                        MaterialTheme.colorScheme.primary.copy(alpha = 0.25f),
+                        RoundedCornerShape(8.dp)
+                    )
             ) {
                 ExerciseSetItemTitle(
-                    modifier = Modifier.background(MaterialTheme.colorScheme.surfaceContainerLow)
+                    modifier = Modifier.background(
+                        MaterialTheme.colorScheme.surfaceContainerLow,
+                        RoundedCornerShape(8.dp, 8.dp, 0.dp, 0.dp)
+                    )
                 )
                 repeat(5) {
                     ExerciseSetItem(

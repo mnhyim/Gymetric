@@ -23,10 +23,11 @@ fun CustomBottomNavigationBarItem(
     Icon(
         imageVector = icon,
         contentDescription = "",
+        tint = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
         modifier = modifier
             .padding(horizontal = 4.dp)
             .clip(RoundedCornerShape(16.dp))
-            .background(color = if (selected) MaterialTheme.colorScheme.primary.copy(alpha = 0.10f) else Color.Unspecified)
+//            .background(color = if (selected) MaterialTheme.colorScheme.primary.copy(alpha = 0.05f) else Color.Unspecified)
             .clickable { onClick() }
             .padding(vertical = 8.dp)
     )
