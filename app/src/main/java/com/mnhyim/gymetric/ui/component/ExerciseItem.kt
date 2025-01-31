@@ -77,7 +77,7 @@ fun ExerciseItem(
         ) {
             Column(
                 modifier = Modifier
-                    .padding(8.dp, 8.dp, 8.dp, 8.dp)
+                    .padding(8.dp, 0.dp, 8.dp, 8.dp)
                     .border(
                         1.dp,
                         MaterialTheme.colorScheme.primary.copy(alpha = 0.25f),

@@ -31,10 +31,15 @@ class MainActivity : ComponentActivity() {
             GymetricTheme {
                 Scaffold(
                     bottomBar = {
-                        CustomBottomNavigationBar(
-                            checkCurrentRoute = { checkCurrentRoute(navBackStackEntry, it) },
-                            onClick = { navController.navigate(it) }
-                        )
+//                        CustomBottomNavigationBar(
+//                            checkCurrentRoute = {
+//                                checkCurrentRoute(
+//                                    navBackStackEntry,
+//                                    it
+//                                )
+//                            },
+//                            onClick = { navController.navigate(it) }
+//                        )
                     },
                     modifier = Modifier.fillMaxSize()
                 ) { _ ->

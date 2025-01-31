@@ -8,6 +8,8 @@ import androidx.navigation.compose.composable
 import com.mnhyim.gymetric.ui.feature.ExerciseScreen
 import com.mnhyim.gymetric.ui.feature.HomeScreen
 import com.mnhyim.gymetric.ui.feature.SettingsScreen
+import com.mnhyim.gymetric.ui.feature.settings.ManageExerciseScreen
+import com.mnhyim.gymetric.ui.feature.settings.ManageMuscleGroupScreen
 
 @Composable
 fun MainNavHost(
@@ -16,7 +18,7 @@ fun MainNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Routes.Exercise,
+        startDestination = Routes.ManageMuscleGroup,
         modifier = modifier
     ) {
         composable<Routes.Home> {
@@ -29,7 +31,15 @@ fun MainNavHost(
 
         }
         composable<Routes.Settings> {
-            SettingsScreen()
+            SettingsScreen(
+                onNavigate = { navController.navigate(it) }
+            )
+        }
+        composable<Routes.ManageMuscleGroup> {
+            ManageMuscleGroupScreen()
+        }
+        composable<Routes.ManageExercises> {
+            ManageExerciseScreen()
         }
     }
 }

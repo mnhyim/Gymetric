@@ -1,12 +1,11 @@
-package com.mnhyim.gymetric.ui.navigation
+package com.mnhyim.gymetric.ui.util
 
-import android.media.SubtitleData
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.FitnessCenter
 import androidx.compose.material.icons.outlined.SportsMartialArts
 import androidx.compose.material.icons.rounded.Info
-import androidx.compose.material.icons.rounded.Warning
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.mnhyim.gymetric.ui.navigation.Routes
 
 enum class SettingsItemEnum(
     val title: String,
@@ -18,13 +17,13 @@ enum class SettingsItemEnum(
         title = "Muscle Group",
         subtitle = "Manage muscle group",
         icon = Icons.Outlined.SportsMartialArts,
-        route = Routes.Home
+        route = Routes.ManageMuscleGroup
     ),
     EXERCISES(
         title = "Exercises",
         subtitle = "Manage exercises",
         icon = Icons.Outlined.FitnessCenter,
-        route = Routes.Home
+        route = Routes.ManageExercises
     ),
     ABOUT(
         title = "About",

@@ -1,13 +1,13 @@
-package com.mnhyim.gymetric.ui.navigation
+package com.mnhyim.gymetric.ui.util
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddChart
 import androidx.compose.material.icons.filled.FitnessCenter
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.mnhyim.gymetric.ui.navigation.Routes
 
-enum class BottomNavBarDestination(
+enum class BottomNavBarEnum(
     val route: Routes,
     val icon: ImageVector
 ) {

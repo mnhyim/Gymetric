@@ -10,9 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavBackStackEntry
-import com.mnhyim.gymetric.checkCurrentRoute
-import com.mnhyim.gymetric.ui.navigation.BottomNavBarDestination
+import com.mnhyim.gymetric.ui.util.BottomNavBarEnum
 import com.mnhyim.gymetric.ui.navigation.Routes
 
 @Composable
@@ -33,7 +31,7 @@ fun CustomBottomNavigationBar(
                 .fillMaxWidth()
                 .padding(vertical = 12.dp, horizontal = 8.dp)
         ) {
-            BottomNavBarDestination.entries.toTypedArray().onEach {
+            BottomNavBarEnum.entries.toTypedArray().onEach {
                 CustomBottomNavigationBarItem(
                     selected = checkCurrentRoute(it.route),
                     icon = it.icon,
