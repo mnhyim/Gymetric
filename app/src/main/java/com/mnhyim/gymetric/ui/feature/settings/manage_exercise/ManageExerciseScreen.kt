@@ -1,4 +1,4 @@
-package com.mnhyim.gymetric.ui.feature.settings
+package com.mnhyim.gymetric.ui.feature.settings.manage_exercise
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

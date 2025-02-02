@@ -8,8 +8,8 @@ import androidx.navigation.compose.composable
 import com.mnhyim.gymetric.ui.feature.ExerciseScreen
 import com.mnhyim.gymetric.ui.feature.HomeScreen
 import com.mnhyim.gymetric.ui.feature.SettingsScreen
-import com.mnhyim.gymetric.ui.feature.settings.ManageExerciseScreen
-import com.mnhyim.gymetric.ui.feature.settings.ManageMuscleGroupScreen
+import com.mnhyim.gymetric.ui.feature.settings.manage_exercise.ManageExerciseScreen
+import com.mnhyim.gymetric.ui.feature.settings.manage_muscle.ManageMuscleGroupScreen
 
 @Composable
 fun MainNavHost(
