@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -28,18 +29,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mnhyim.gymetric.domain.model.MuscleGroup
 
 @Composable
 fun ManageMuscleGroupScreen(
+    viewModel: ManageMuscleGroupViewModel = hiltViewModel(),
     modifier: Modifier = Modifier
 ) {
     var showModal by remember { mutableStateOf(false) }
+    val muscleGroup by viewModel.muscleGroup.collectAsStateWithLifecycle()
+
     Scaffold(
         topBar = {},
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { showModal = true },
+                onClick = { viewModel.insert() },
                 shape = CircleShape
             ) {
                 Icon(
@@ -95,6 +101,8 @@ fun ManageMuscleGroupScreen(
         }
 
         ManageMuscleGroupScreenContent(
+            muscleGroup = muscleGroup,
+            onDelete = { viewModel.delete(it) },
             modifier = Modifier
                 .padding(innerPadding)
                 .padding(16.dp)
@@ -104,6 +112,8 @@ fun ManageMuscleGroupScreen(
 
 @Composable
 private fun ManageMuscleGroupScreenContent(
+    muscleGroup: List<MuscleGroup>,
+    onDelete: (MuscleGroup) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -112,9 +122,10 @@ private fun ManageMuscleGroupScreenContent(
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            items(10) {
+            items(items = muscleGroup) {
                 MuscleGroupItem(
-                    item = MuscleGroup(0, "Chest $it")
+                    item = it,
+                    onDelete = { onDelete(it) }
                 )
             }
         }
@@ -124,6 +135,7 @@ private fun ManageMuscleGroupScreenContent(
 @Composable
 fun MuscleGroupItem(
     item: MuscleGroup,
+    onDelete: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card {
@@ -138,7 +150,7 @@ fun MuscleGroupItem(
                 modifier = Modifier.padding(16.dp, 16.dp, 0.dp, 16.dp)
             )
             IconButton(
-                onClick = {}
+                onClick = onDelete
             ) {
                 Icon(
                     imageVector = Icons.Outlined.Delete,

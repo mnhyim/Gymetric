@@ -18,7 +18,9 @@ import com.mnhyim.gymetric.ui.component.CustomBottomNavigationBar
 import com.mnhyim.gymetric.ui.navigation.MainNavHost
 import com.mnhyim.gymetric.ui.navigation.Routes
 import com.mnhyim.gymetric.ui.theme.GymetricTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {

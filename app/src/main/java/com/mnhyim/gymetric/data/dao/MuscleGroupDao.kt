@@ -14,8 +14,8 @@ interface MuscleGroupDao {
     fun getAllMuscleGroup(): Flow<List<MuscleGroupEntity>>
 
     @Insert
-    fun insertMuscleGroup(muscleGroup: MuscleGroupEntity)
+    suspend fun insertMuscleGroup(muscleGroup: MuscleGroupEntity)
 
     @Delete
-    fun deleteMuscleGroup(muscleGroup: MuscleGroupEntity)
+    suspend fun deleteMuscleGroup(muscleGroup: MuscleGroupEntity)
 }
