@@ -16,8 +16,10 @@ sealed class Routes(val route: String) {
 
     @Serializable
     data object Settings : Routes("SETTINGS")
+
     @Serializable
     data object ManageMuscleGroup : Routes("MANAGE_MUSCLE_GROUP")
+
     @Serializable
     data object ManageExercises : Routes("MANAGE_EXERCISE")
 }

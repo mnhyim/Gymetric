@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import com.mnhyim.gymetric.data.GymetricDatabase
 import com.mnhyim.gymetric.data.dao.MuscleGroupDao
+import com.mnhyim.gymetric.data.repository.MuscleGroupRepositoryImpl
+import com.mnhyim.gymetric.domain.repository.MuscleGroupRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,5 +35,13 @@ object DataModule {
         database: GymetricDatabase
     ): MuscleGroupDao {
         return database.muscleGroupDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideMuscleGroupRepository(
+        muscleGroupDao: MuscleGroupDao
+    ): MuscleGroupRepository {
+        return MuscleGroupRepositoryImpl(muscleGroupDao)
     }
 }

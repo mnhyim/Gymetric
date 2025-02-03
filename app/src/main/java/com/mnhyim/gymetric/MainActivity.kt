@@ -14,7 +14,6 @@ import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.mnhyim.gymetric.ui.component.CustomBottomNavigationBar
 import com.mnhyim.gymetric.ui.navigation.MainNavHost
 import com.mnhyim.gymetric.ui.navigation.Routes
 import com.mnhyim.gymetric.ui.theme.GymetricTheme

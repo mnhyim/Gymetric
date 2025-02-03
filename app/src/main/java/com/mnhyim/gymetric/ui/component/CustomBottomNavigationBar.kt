@@ -10,8 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
-import com.mnhyim.gymetric.ui.util.BottomNavBarEnum
 import com.mnhyim.gymetric.ui.navigation.Routes
+import com.mnhyim.gymetric.ui.util.BottomNavBarEnum
 
 @Composable
 fun CustomBottomNavigationBar(

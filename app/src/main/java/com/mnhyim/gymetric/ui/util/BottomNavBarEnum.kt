@@ -11,7 +11,7 @@ enum class BottomNavBarEnum(
     val route: Routes,
     val icon: ImageVector
 ) {
-//    HOME(
+    //    HOME(
 //        route = Routes.Home,
 //        icon = Icons.Default.Home
 //    ),
