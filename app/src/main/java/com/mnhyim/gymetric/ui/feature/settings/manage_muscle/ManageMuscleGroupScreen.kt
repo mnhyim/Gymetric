@@ -9,9 +9,12 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -20,6 +23,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -32,7 +36,10 @@ import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mnhyim.gymetric.domain.model.MuscleGroup
+import com.mnhyim.gymetric.ui.component.AddMuscleGroupDialog
+import com.mnhyim.gymetric.ui.component.MuscleGroupItem
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ManageMuscleGroupScreen(
     viewModel: ManageMuscleGroupViewModel = hiltViewModel(),
@@ -42,10 +49,28 @@ fun ManageMuscleGroupScreen(
     val muscleGroup by viewModel.muscleGroup.collectAsStateWithLifecycle()
 
     Scaffold(
-        topBar = {},
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        text = "Add Categories"
+                    )
+                },
+                navigationIcon = {
+                    IconButton(
+                        onClick = {}
+                    ) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = ""
+                        )
+                    }
+                }
+            )
+        },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { viewModel.insert() },
+                onClick = { showModal = true },
                 shape = CircleShape
             ) {
                 Icon(
@@ -56,48 +81,10 @@ fun ManageMuscleGroupScreen(
         }
     ) { innerPadding ->
         if (showModal) {
-            Dialog(onDismissRequest = { showModal = false }) {
-                Card {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp),
-                    ) {
-                        Text(
-                            text = "Add Category",
-                            style = MaterialTheme.typography.titleMedium,
-                            modifier = Modifier
-                        )
-                        OutlinedTextField(
-                            value = "",
-                            onValueChange = {},
-                            label = {
-                                Text(
-                                    text = "Name"
-                                )
-                            },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(vertical = 16.dp)
-                        )
-                        Row(
-                            horizontalArrangement = Arrangement.End,
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            TextButton(
-                                onClick = {}
-                            ) {
-                                Text("Cancel")
-                            }
-                            TextButton(
-                                onClick = {}
-                            ) {
-                                Text("Add")
-                            }
-                        }
-                    }
-                }
-            }
+            AddMuscleGroupDialog(
+                onSave = { viewModel.insert(it) },
+                onDismiss = { showModal = false },
+            )
         }
 
         ManageMuscleGroupScreenContent(
@@ -105,7 +92,7 @@ fun ManageMuscleGroupScreen(
             onDelete = { viewModel.delete(it) },
             modifier = Modifier
                 .padding(innerPadding)
-                .padding(16.dp)
+                .padding(16.dp,0.dp,16.dp,16.dp)
         )
     }
 }
@@ -126,35 +113,6 @@ private fun ManageMuscleGroupScreenContent(
                 MuscleGroupItem(
                     item = it,
                     onDelete = { onDelete(it) }
-                )
-            }
-        }
-    }
-}
-
-@Composable
-fun MuscleGroupItem(
-    item: MuscleGroup,
-    onDelete: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Card {
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = modifier.fillMaxWidth()
-        ) {
-            Text(
-                text = item.name,
-                style = MaterialTheme.typography.titleMedium,
-                modifier = Modifier.padding(16.dp, 16.dp, 0.dp, 16.dp)
-            )
-            IconButton(
-                onClick = onDelete
-            ) {
-                Icon(
-                    imageVector = Icons.Outlined.Delete,
-                    contentDescription = ""
                 )
             }
         }

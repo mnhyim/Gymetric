@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -42,7 +43,7 @@ class MainActivity : ComponentActivity() {
 //                            onClick = { navController.navigate(it) }
 //                        )
                     },
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier.fillMaxSize().imePadding()
                 ) { _ ->
                     MainNavHost(
                         navController = navController

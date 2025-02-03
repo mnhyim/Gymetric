@@ -26,10 +26,10 @@ class ManageMuscleGroupViewModel @Inject constructor(
         }
     }
 
-    fun insert() {
+    fun insert(name: String) {
         viewModelScope.launch {
             muscleGroupRepository.insertMuscleGroup(
-                MuscleGroup(0, "AAA")
+                MuscleGroup(0, name)
             )
         }
     }
