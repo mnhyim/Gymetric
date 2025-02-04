@@ -9,6 +9,6 @@ import com.mnhyim.gymetric.data.entity.MuscleGroupEntity
     entities = [MuscleGroupEntity::class],
     version = 1,
 )
-abstract class GymetricDatabase() : RoomDatabase() {
+abstract class GymetricDatabase : RoomDatabase() {
     abstract fun muscleGroupDao(): MuscleGroupDao
 }

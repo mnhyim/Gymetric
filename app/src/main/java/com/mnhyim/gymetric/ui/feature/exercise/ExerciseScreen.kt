@@ -1,4 +1,4 @@
-package com.mnhyim.gymetric.ui.feature
+package com.mnhyim.gymetric.ui.feature.exercise
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,8 +16,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.mnhyim.gymetric.ui.component.ExerciseItem
-import com.mnhyim.gymetric.ui.component.WeeklyDate
+import com.mnhyim.gymetric.ui.feature.exercise.components.ExerciseSessionItem
+import com.mnhyim.gymetric.ui.feature.exercise.components.WeeklyDate
 
 @Composable
 fun ExerciseScreen(
@@ -58,7 +58,7 @@ private fun ExerciseScreenContent(
             modifier = Modifier
         ) {
             items(5) {
-                ExerciseItem(
+                ExerciseSessionItem(
                     expanded = expanded,
                     onExpand = { expanded = !expanded }
                 )

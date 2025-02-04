@@ -1,4 +1,4 @@
-package com.mnhyim.gymetric.ui.component
+package com.mnhyim.gymetric.ui.feature.exercise.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

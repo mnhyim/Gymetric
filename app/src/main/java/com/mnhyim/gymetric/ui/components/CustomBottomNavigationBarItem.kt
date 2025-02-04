@@ -1,4 +1,4 @@
-package com.mnhyim.gymetric.ui.component
+package com.mnhyim.gymetric.ui.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding

@@ -1,4 +1,4 @@
-package com.mnhyim.gymetric.ui.component
+package com.mnhyim.gymetric.ui.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth

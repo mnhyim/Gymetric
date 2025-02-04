@@ -1,4 +1,4 @@
-package com.mnhyim.gymetric.ui.component
+package com.mnhyim.gymetric.ui.feature.exercise.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.BorderStroke
@@ -27,7 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ExerciseItem(
+fun ExerciseSessionItem(
     expanded: Boolean,
     onExpand: () -> Unit,
     modifier: Modifier = Modifier

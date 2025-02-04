@@ -43,7 +43,9 @@ class MainActivity : ComponentActivity() {
 //                            onClick = { navController.navigate(it) }
 //                        )
                     },
-                    modifier = Modifier.fillMaxSize().imePadding()
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .imePadding()
                 ) { _ ->
                     MainNavHost(
                         navController = navController

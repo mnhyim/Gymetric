@@ -1,4 +1,4 @@
-package com.mnhyim.gymetric.ui.component
+package com.mnhyim.gymetric.ui.feature.settings.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
