@@ -22,6 +22,7 @@ import com.mnhyim.gymetric.domain.model.MuscleGroup
 
 @Composable
 fun AddExerciseDialog(
+    muscleGroups: List<MuscleGroup>,
     onDismiss: () -> Unit,
     onSave: (String) -> Unit,
     modifier: Modifier = Modifier
@@ -39,12 +40,7 @@ fun AddExerciseDialog(
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
                 MuscleGroupDropdown(
-                    muscleGroups = listOf(
-                        MuscleGroup(0, "Chest"),
-                        MuscleGroup(0, "Chest"),
-                        MuscleGroup(0, "Chest"),
-                        MuscleGroup(0, "Chest"),
-                    ),
+                    muscleGroups = muscleGroups,
                     onSelect = {},
                     modifier = Modifier
                         .fillMaxWidth()

@@ -3,8 +3,11 @@ package com.mnhyim.gymetric.di
 import android.content.Context
 import androidx.room.Room
 import com.mnhyim.gymetric.data.GymetricDatabase
+import com.mnhyim.gymetric.data.dao.ExerciseDao
 import com.mnhyim.gymetric.data.dao.MuscleGroupDao
+import com.mnhyim.gymetric.data.repository.ExerciseRepositoryImpl
 import com.mnhyim.gymetric.data.repository.MuscleGroupRepositoryImpl
+import com.mnhyim.gymetric.domain.repository.ExerciseRepository
 import com.mnhyim.gymetric.domain.repository.MuscleGroupRepository
 import dagger.Module
 import dagger.Provides
@@ -39,9 +42,26 @@ object DataModule {
 
     @Provides
     @Singleton
+    fun provideExerciseDao(
+        database: GymetricDatabase
+    ): ExerciseDao {
+        return database.exerciseDao()
+    }
+
+    @Provides
+    @Singleton
     fun provideMuscleGroupRepository(
         muscleGroupDao: MuscleGroupDao
     ): MuscleGroupRepository {
         return MuscleGroupRepositoryImpl(muscleGroupDao)
+    }
+
+
+    @Provides
+    @Singleton
+    fun provideExerciseRepository(
+        exerciseDao: ExerciseDao
+    ): ExerciseRepository {
+        return ExerciseRepositoryImpl(exerciseDao)
     }
 }

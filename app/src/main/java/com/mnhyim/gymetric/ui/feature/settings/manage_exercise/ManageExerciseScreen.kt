@@ -11,6 +11,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -18,14 +19,20 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mnhyim.gymetric.ui.feature.settings.components.AddExerciseDialog
 import com.mnhyim.gymetric.ui.feature.settings.components.ExerciseItem
 
 @Composable
 fun ManageExerciseScreen(
+    viewModel: ManageExerciseViewModel = hiltViewModel(),
     modifier: Modifier = Modifier
 ) {
     var showModal by remember { mutableStateOf(false) }
+
+    val muscleGroups by viewModel.muscleGroups.collectAsStateWithLifecycle()
+    val exercises by viewModel.exercises.collectAsStateWithLifecycle()
 
     Scaffold(
         topBar = {
@@ -45,6 +52,7 @@ fun ManageExerciseScreen(
     ) { innerPadding ->
         if (showModal) {
             AddExerciseDialog(
+                muscleGroups = muscleGroups,
                 onSave = { },
                 onDismiss = { showModal = false },
                 modifier = Modifier
@@ -52,7 +60,7 @@ fun ManageExerciseScreen(
                     .padding(24.dp),
             )
         }
-
+        Text("$exercises", modifier = Modifier.padding(16.dp))
         ManageExerciseScreenContent(
             modifier = Modifier
                 .padding(innerPadding)
