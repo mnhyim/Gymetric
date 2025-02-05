@@ -25,9 +25,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.mnhyim.gymetric.domain.model.Exercise
+import com.mnhyim.gymetric.domain.model.MuscleGroupWithExercise
 
 @Composable
 fun ExerciseItem(
+    muscleGroup: MuscleGroupWithExercise,
+    onDelete: (Exercise) -> Unit,
     modifier: Modifier = Modifier
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -41,7 +45,7 @@ fun ExerciseItem(
                 .padding(16.dp, 8.dp, 8.dp, 8.dp)
         ) {
             Text(
-                text = "Muscle Name",
+                text = muscleGroup.muscleGroup.name,
                 style = MaterialTheme.typography.titleMedium
             )
             IconButton(
@@ -62,7 +66,7 @@ fun ExerciseItem(
                     .fillMaxWidth()
                     .padding(16.dp, 4.dp, 16.dp, 4.dp)
             ) {
-                repeat(10) {
+                repeat(muscleGroup.exercises.size) {
                     if (it != 0) HorizontalDivider()
                     Row(
                         horizontalArrangement = Arrangement.SpaceBetween,
@@ -70,11 +74,11 @@ fun ExerciseItem(
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Text(
-                            text = "Exercise Name",
+                            text = muscleGroup.exercises[it].exerciseName,
                             style = MaterialTheme.typography.titleSmall
                         )
                         IconButton(
-                            onClick = {}
+                            onClick = { onDelete(muscleGroup.exercises[it]) }
                         ) {
                             Icon(
                                 imageVector = Icons.Outlined.Delete,

@@ -60,8 +60,9 @@ object DataModule {
     @Provides
     @Singleton
     fun provideExerciseRepository(
+        muscleGroupDao: MuscleGroupDao,
         exerciseDao: ExerciseDao
     ): ExerciseRepository {
-        return ExerciseRepositoryImpl(exerciseDao)
+        return ExerciseRepositoryImpl(muscleGroupDao, exerciseDao)
     }
 }

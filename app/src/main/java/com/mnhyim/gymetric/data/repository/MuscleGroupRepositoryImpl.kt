@@ -37,5 +37,4 @@ class MuscleGroupRepositoryImpl @Inject constructor(
             )
         )
     }
-
 }

@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -24,10 +25,11 @@ import com.mnhyim.gymetric.domain.model.MuscleGroup
 fun AddExerciseDialog(
     muscleGroups: List<MuscleGroup>,
     onDismiss: () -> Unit,
-    onSave: (String) -> Unit,
+    onSave: (Long, String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     var name by remember { mutableStateOf("") }
+    var selectedMuscleGroup by remember { mutableLongStateOf(-1) }
 
     Dialog(onDismissRequest = onDismiss) {
         Card {
@@ -41,7 +43,8 @@ fun AddExerciseDialog(
                 )
                 MuscleGroupDropdown(
                     muscleGroups = muscleGroups,
-                    onSelect = {},
+                    selectedMuscleGroup = selectedMuscleGroup,
+                    onSelect = { selectedMuscleGroup = it },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 8.dp)
@@ -67,7 +70,7 @@ fun AddExerciseDialog(
                         Text("Cancel")
                     }
                     TextButton(onClick = {
-                        onSave(name)
+                        onSave(selectedMuscleGroup,name)
                         name = ""
                     }) {
                         Text("Add")

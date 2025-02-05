@@ -27,6 +27,7 @@ import com.mnhyim.gymetric.domain.model.MuscleGroup
 @Composable
 fun MuscleGroupDropdown(
     muscleGroups: List<MuscleGroup>,
+    selectedMuscleGroup: Long,
     onSelect: (Long) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -40,7 +41,7 @@ fun MuscleGroupDropdown(
             onExpandedChange = { isExpanded = !isExpanded }
         ) {
             OutlinedTextField(
-                value = "",
+                value = muscleGroups.find { it.id == selectedMuscleGroup }?.name ?: "",
                 onValueChange = {},
                 label = {
                     Text(
@@ -68,7 +69,10 @@ fun MuscleGroupDropdown(
                         text = muscleGroups[it].name,
                         style = MaterialTheme.typography.titleSmall,
                         modifier = Modifier
-                            .clickable { onSelect(muscleGroups[it].id) }
+                            .clickable {
+                                onSelect(muscleGroups[it].id)
+                                isExpanded = false
+                            }
                             .padding(8.dp, 12.dp)
                             .fillMaxWidth()
                     )
