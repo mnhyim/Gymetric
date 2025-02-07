@@ -33,6 +33,7 @@ import com.mnhyim.gymetric.ui.feature.settings.components.MuscleGroupItem
 @Composable
 fun ManageMuscleGroupScreen(
     viewModel: ManageMuscleGroupViewModel = hiltViewModel(),
+    onNavigate: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     var showModal by remember { mutableStateOf(false) }
@@ -43,12 +44,12 @@ fun ManageMuscleGroupScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = "Add Categories"
+                        text = "Add Muscle Group"
                     )
                 },
                 navigationIcon = {
                     IconButton(
-                        onClick = {}
+                        onClick = onNavigate
                     ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
@@ -80,7 +81,7 @@ fun ManageMuscleGroupScreen(
         ManageMuscleGroupScreenContent(
             muscleGroup = muscleGroup,
             onDelete = { viewModel.delete(it) },
-            modifier = Modifier
+            modifier = modifier
                 .padding(innerPadding)
                 .padding(16.dp, 0.dp, 16.dp, 16.dp)
         )

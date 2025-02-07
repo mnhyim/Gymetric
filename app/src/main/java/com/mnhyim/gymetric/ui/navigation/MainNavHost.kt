@@ -18,7 +18,7 @@ fun MainNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Routes.ManageExercises,
+        startDestination = Routes.Home,
         modifier = modifier
     ) {
         composable<Routes.Home> {
@@ -36,10 +36,14 @@ fun MainNavHost(
             )
         }
         composable<Routes.ManageMuscleGroup> {
-            ManageMuscleGroupScreen()
+            ManageMuscleGroupScreen(
+                onNavigate = { navController.navigateUp() }
+            )
         }
         composable<Routes.ManageExercises> {
-            ManageExerciseScreen()
+            ManageExerciseScreen(
+                onNavigate = { navController.navigateUp() }
+            )
         }
     }
 }
