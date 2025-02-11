@@ -1,17 +1,15 @@
 package com.mnhyim.gymetric.ui.feature.settings.manage_exercise
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mnhyim.gymetric.domain.model.Exercise
-import com.mnhyim.gymetric.domain.model.MuscleGroupWithExercise
+import com.mnhyim.gymetric.domain.model.ExercisesByMuscleGroup
 import com.mnhyim.gymetric.domain.model.MuscleGroup
 import com.mnhyim.gymetric.domain.repository.ExerciseRepository
 import com.mnhyim.gymetric.domain.repository.MuscleGroupRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,12 +17,12 @@ import javax.inject.Inject
 class ManageExerciseViewModel @Inject constructor(
     private val muscleGroupRepository: MuscleGroupRepository,
     private val exerciseRepository: ExerciseRepository
-): ViewModel() {
+) : ViewModel() {
 
     private var _muscleGroups = MutableStateFlow(emptyList<MuscleGroup>())
     val muscleGroups = _muscleGroups.asStateFlow()
 
-    private var _exercises = MutableStateFlow(emptyList<MuscleGroupWithExercise>())
+    private var _exercises = MutableStateFlow(emptyList<ExercisesByMuscleGroup>())
     val exercises = _exercises.asStateFlow()
 
     init {
@@ -34,9 +32,8 @@ class ManageExerciseViewModel @Inject constructor(
             }
         }
         viewModelScope.launch {
-            exerciseRepository.getAllExercise().collect {
+            exerciseRepository.getAllExercisesByMuscleGroup().collect {
                 _exercises.value = it
-                Log.d("AAAA", "${exercises.value}")
             }
         }
     }
@@ -45,17 +42,17 @@ class ManageExerciseViewModel @Inject constructor(
         viewModelScope.launch {
             exerciseRepository.insertExercise(
                 Exercise(
-                    muscleGroupId = muscleGroupId,
                     exerciseId = 0,
-                    exerciseName = exerciseName
-                )
+                    exerciseName = exerciseName,
+                ),
+                muscleGroupId = muscleGroupId,
             )
         }
     }
 
-    fun delete(exercise: Exercise) {
+    fun delete(exercise: Exercise, muscleGroupId: Long) {
         viewModelScope.launch {
-            exerciseRepository.deleteExercise(exercise)
+            exerciseRepository.deleteExercise(exercise, muscleGroupId)
         }
     }
 }

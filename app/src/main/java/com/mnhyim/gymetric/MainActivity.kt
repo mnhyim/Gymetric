@@ -2,7 +2,6 @@ package com.mnhyim.gymetric
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -65,6 +64,7 @@ class MainActivity : ComponentActivity() {
 fun checkCurrentRoute(navBackStackEntry: NavBackStackEntry?, route: Routes): Boolean {
     return navBackStackEntry?.destination?.hierarchy?.any { it.hasRoute(route::class) } ?: false
 }
+
 fun checkBottomBar(navBackStackEntry: NavBackStackEntry?): Boolean {
     val showBottomBar = listOf(
         Routes.Home,

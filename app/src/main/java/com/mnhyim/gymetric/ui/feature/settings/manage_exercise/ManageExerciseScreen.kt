@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mnhyim.gymetric.domain.model.Exercise
-import com.mnhyim.gymetric.domain.model.MuscleGroupWithExercise
+import com.mnhyim.gymetric.domain.model.ExercisesByMuscleGroup
 import com.mnhyim.gymetric.ui.feature.settings.components.AddExerciseDialog
 import com.mnhyim.gymetric.ui.feature.settings.components.ExerciseItem
 
@@ -81,7 +81,7 @@ fun ManageExerciseScreen(
                 onSave = { muscleGroupId, exerciseName ->
                     viewModel.insert(
                         muscleGroupId,
-                        exerciseName
+                        exerciseName,
                     )
                 },
                 onDismiss = { showModal = false },
@@ -92,7 +92,12 @@ fun ManageExerciseScreen(
         }
         ManageExerciseScreenContent(
             exercises = exercises,
-            onExerciseDelete = { viewModel.delete(it) },
+            onExerciseDelete = { exercise, muscleGroupId ->
+                viewModel.delete(
+                    exercise,
+                    muscleGroupId
+                )
+            },
             modifier = modifier
                 .padding(innerPadding)
                 .padding(16.dp, 0.dp, 16.dp, 16.dp)
@@ -102,8 +107,8 @@ fun ManageExerciseScreen(
 
 @Composable
 private fun ManageExerciseScreenContent(
-    exercises: List<MuscleGroupWithExercise>,
-    onExerciseDelete: (Exercise) -> Unit,
+    exercises: List<ExercisesByMuscleGroup>,
+    onExerciseDelete: (Exercise, Long) -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -113,10 +118,15 @@ private fun ManageExerciseScreenContent(
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            items(items = exercises) { muscleGroup: MuscleGroupWithExercise ->
+            items(items = exercises) { muscleGroup ->
                 ExerciseItem(
                     muscleGroup = muscleGroup,
-                    onDelete = { onExerciseDelete(it) }
+                    onDelete = { exercise, muscleGroupId ->
+                        onExerciseDelete(
+                            exercise,
+                            muscleGroupId
+                        )
+                    }
                 )
             }
         }

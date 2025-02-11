@@ -28,7 +28,7 @@ fun AddExerciseDialog(
     onSave: (Long, String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var name by remember { mutableStateOf("") }
+    var exerciseName by remember { mutableStateOf("") }
     var selectedMuscleGroup by remember { mutableLongStateOf(-1) }
 
     Dialog(onDismissRequest = onDismiss) {
@@ -50,8 +50,8 @@ fun AddExerciseDialog(
                         .padding(bottom = 8.dp)
                 )
                 OutlinedTextField(
-                    value = name,
-                    onValueChange = { name = it },
+                    value = exerciseName,
+                    onValueChange = { exerciseName = it },
                     label = {
                         Text(
                             text = "Name",
@@ -70,8 +70,11 @@ fun AddExerciseDialog(
                         Text("Cancel")
                     }
                     TextButton(onClick = {
-                        onSave(selectedMuscleGroup,name)
-                        name = ""
+                        onSave(
+                            selectedMuscleGroup,
+                            exerciseName,
+                        )
+                        exerciseName = ""
                     }) {
                         Text("Add")
                     }

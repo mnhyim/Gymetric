@@ -26,12 +26,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mnhyim.gymetric.domain.model.Exercise
-import com.mnhyim.gymetric.domain.model.MuscleGroupWithExercise
+import com.mnhyim.gymetric.domain.model.ExercisesByMuscleGroup
 
 @Composable
 fun ExerciseItem(
-    muscleGroup: MuscleGroupWithExercise,
-    onDelete: (Exercise) -> Unit,
+    muscleGroup: ExercisesByMuscleGroup,
+    onDelete: (Exercise, Long) -> Unit,
     modifier: Modifier = Modifier
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -78,7 +78,12 @@ fun ExerciseItem(
                             style = MaterialTheme.typography.titleSmall
                         )
                         IconButton(
-                            onClick = { onDelete(muscleGroup.exercises[it]) }
+                            onClick = {
+                                onDelete(
+                                    muscleGroup.exercises[it],
+                                    muscleGroup.muscleGroup.id
+                                )
+                            }
                         ) {
                             Icon(
                                 imageVector = Icons.Outlined.Delete,

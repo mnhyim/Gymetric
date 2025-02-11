@@ -22,19 +22,13 @@ class MuscleGroupRepositoryImpl @Inject constructor(
 
     override suspend fun insertMuscleGroup(muscleGroup: MuscleGroup) {
         dao.insertMuscleGroup(
-            muscleGroup = MuscleGroupEntity(
-                id = muscleGroup.id,
-                name = muscleGroup.name
-            )
+            muscleGroup = MuscleGroupEntity(id = muscleGroup.id, name = muscleGroup.name)
         )
     }
 
     override suspend fun deleteMuscleGroup(muscleGroup: MuscleGroup) {
         dao.deleteMuscleGroup(
-            muscleGroup = MuscleGroupEntity(
-                id = muscleGroup.id,
-                name = muscleGroup.name
-            )
+            muscleGroup = MuscleGroupEntity(id = muscleGroup.id, name = muscleGroup.name)
         )
     }
 }

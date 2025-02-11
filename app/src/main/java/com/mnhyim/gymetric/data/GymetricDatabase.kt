@@ -6,10 +6,10 @@ import com.mnhyim.gymetric.data.dao.ExerciseDao
 import com.mnhyim.gymetric.data.dao.MuscleGroupDao
 import com.mnhyim.gymetric.data.entity.ExerciseEntity
 import com.mnhyim.gymetric.data.entity.MuscleGroupEntity
-import com.mnhyim.gymetric.data.entity.MuscleGroupWithExercisesEntity
+import com.mnhyim.gymetric.data.entity.TrainingSetEntity
 
 @Database(
-    entities = [MuscleGroupEntity::class, ExerciseEntity::class],
+    entities = [MuscleGroupEntity::class, ExerciseEntity::class, TrainingSetEntity::class],
     version = 1,
 )
 abstract class GymetricDatabase : RoomDatabase() {
