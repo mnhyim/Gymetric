@@ -72,9 +72,6 @@ private fun ExerciseScreenContent(
         modifier = modifier
     ) {
         Text(
-            text = "$trainingSet"
-        )
-        Text(
             text = "Today's Exercise",
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Bold,
