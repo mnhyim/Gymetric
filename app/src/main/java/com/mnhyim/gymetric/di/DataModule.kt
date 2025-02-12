@@ -5,10 +5,13 @@ import androidx.room.Room
 import com.mnhyim.gymetric.data.GymetricDatabase
 import com.mnhyim.gymetric.data.dao.ExerciseDao
 import com.mnhyim.gymetric.data.dao.MuscleGroupDao
+import com.mnhyim.gymetric.data.dao.TrainingSetDao
 import com.mnhyim.gymetric.data.repository.ExerciseRepositoryImpl
 import com.mnhyim.gymetric.data.repository.MuscleGroupRepositoryImpl
+import com.mnhyim.gymetric.data.repository.TrainingSetRepositoryImpl
 import com.mnhyim.gymetric.domain.repository.ExerciseRepository
 import com.mnhyim.gymetric.domain.repository.MuscleGroupRepository
+import com.mnhyim.gymetric.domain.repository.TrainingSetRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -50,12 +53,19 @@ object DataModule {
 
     @Provides
     @Singleton
+    fun provideTrainingSetDao(
+        database: GymetricDatabase
+    ): TrainingSetDao {
+        return database.trainingSetDao()
+    }
+
+    @Provides
+    @Singleton
     fun provideMuscleGroupRepository(
         muscleGroupDao: MuscleGroupDao
     ): MuscleGroupRepository {
         return MuscleGroupRepositoryImpl(muscleGroupDao)
     }
-
 
     @Provides
     @Singleton
@@ -63,5 +73,13 @@ object DataModule {
         exerciseDao: ExerciseDao
     ): ExerciseRepository {
         return ExerciseRepositoryImpl(exerciseDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideTrainingSetRepository(
+        trainingSetDao: TrainingSetDao
+    ): TrainingSetRepository {
+        return TrainingSetRepositoryImpl(trainingSetDao)
     }
 }

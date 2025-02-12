@@ -21,20 +21,26 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.mnhyim.gymetric.domain.model.TrainingSet
 import com.mnhyim.gymetric.ui.feature.exercise.components.ExerciseSessionItem
 import com.mnhyim.gymetric.ui.feature.exercise.components.WeeklyDate
 
 @Composable
 fun ExerciseScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    viewModel: ExerciseViewModel = hiltViewModel()
 ) {
+    val trainingSet by viewModel.trainingSet.collectAsStateWithLifecycle()
+
     Scaffold(
         topBar = {
             WeeklyDate()
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = {},
+                onClick = { viewModel.insert() },
                 shape = CircleShape
             ) {
                 Icon(
@@ -46,6 +52,7 @@ fun ExerciseScreen(
         modifier = modifier
     ) { innerPadding ->
         ExerciseScreenContent(
+            trainingSet = trainingSet,
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
@@ -56,6 +63,7 @@ fun ExerciseScreen(
 
 @Composable
 private fun ExerciseScreenContent(
+    trainingSet: List<TrainingSet>,
     modifier: Modifier = Modifier
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -63,6 +71,9 @@ private fun ExerciseScreenContent(
     Column(
         modifier = modifier
     ) {
+        Text(
+            text = "$trainingSet"
+        )
         Text(
             text = "Today's Exercise",
             style = MaterialTheme.typography.titleMedium,

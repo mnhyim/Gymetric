@@ -6,7 +6,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
 import com.mnhyim.gymetric.data.entity.ExerciseEntity
-import com.mnhyim.gymetric.data.entity.ExercisesByMuscleGroupEntity
+import com.mnhyim.gymetric.data.entity.relation.ExercisesByMuscleGroupEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
