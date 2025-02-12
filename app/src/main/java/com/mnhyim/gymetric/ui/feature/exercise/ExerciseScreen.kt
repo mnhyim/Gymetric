@@ -15,6 +15,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -26,6 +27,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mnhyim.gymetric.domain.model.TrainingSet
 import com.mnhyim.gymetric.ui.feature.exercise.components.ExerciseSessionItem
 import com.mnhyim.gymetric.ui.feature.exercise.components.WeeklyDate
+import java.time.LocalDate
 
 @Composable
 fun ExerciseScreen(
@@ -33,10 +35,18 @@ fun ExerciseScreen(
     viewModel: ExerciseViewModel = hiltViewModel()
 ) {
     val trainingSet by viewModel.trainingSet.collectAsStateWithLifecycle()
+    val weekDates by viewModel.weekDates.collectAsStateWithLifecycle()
+    var selectedDate by remember { mutableStateOf<LocalDate>(LocalDate.now()) }
 
     Scaffold(
         topBar = {
-            WeeklyDate()
+            WeeklyDate(
+                dates = weekDates,
+                selectedDate = selectedDate,
+                onClick = { selectedDate = it },
+                onNext = { viewModel.getCurrentWeekDates(offset = 1) },
+                onPrev = { viewModel.getCurrentWeekDates(offset = -1) },
+            )
         },
         floatingActionButton = {
             FloatingActionButton(
@@ -77,16 +87,16 @@ private fun ExerciseScreenContent(
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(bottom = 8.dp)
         )
-        LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier
-        ) {
-            items(5) {
-                ExerciseSessionItem(
-                    expanded = expanded,
-                    onExpand = { expanded = !expanded }
-                )
-            }
-        }
+//        LazyColumn(
+//            verticalArrangement = Arrangement.spacedBy(8.dp),
+//            modifier = Modifier
+//        ) {
+//            items(5) {
+//                ExerciseSessionItem(
+//                    expanded = expanded,
+//                    onExpand = { expanded = !expanded }
+//                )
+//            }
+//        }
     }
 }

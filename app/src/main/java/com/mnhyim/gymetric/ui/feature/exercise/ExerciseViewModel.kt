@@ -1,12 +1,12 @@
 package com.mnhyim.gymetric.ui.feature.exercise
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.mnhyim.gymetric.domain.model.DateItem
 import com.mnhyim.gymetric.domain.model.Exercise
-import com.mnhyim.gymetric.domain.model.MuscleGroup
 import com.mnhyim.gymetric.domain.model.TrainingSet
 import com.mnhyim.gymetric.domain.repository.TrainingSetRepository
+import com.mnhyim.gymetric.util.CalendarUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,17 +20,30 @@ import kotlin.random.Random
 @HiltViewModel
 class ExerciseViewModel @Inject constructor(
     private val trainingSetRepository: TrainingSetRepository
-): ViewModel() {
+) : ViewModel() {
+
+    private val calendarUtil = CalendarUtil()
 
     private var _trainingSet = MutableStateFlow(emptyList<TrainingSet>())
     val trainingSet = _trainingSet.asStateFlow()
 
+    private var _weekDates = MutableStateFlow(emptyList<DateItem>())
+    val weekDates = _weekDates.asStateFlow()
+
     init {
+        getCurrentWeekDates(offset = 0)
         viewModelScope.launch {
-            trainingSetRepository.getTrainingSetByDates(startDate = LocalDate.of(2025,2,3), endDate = LocalDate.of(2025,2,16)).collect {
+            trainingSetRepository.getTrainingSetByDates(
+                startDate = LocalDate.of(2025, 2, 3),
+                endDate = LocalDate.of(2025, 2, 16)
+            ).collect {
                 _trainingSet.value = it
             }
         }
+    }
+
+    fun getCurrentWeekDates(offset: Long) {
+        _weekDates.value = calendarUtil.getCurrentWeekDates(offset)
     }
 
     fun insert() {
@@ -50,7 +63,8 @@ class ExerciseViewModel @Inject constructor(
             1739568000000, // Feb 15, 2025
             1739654400000  // Feb 16, 2025
         )
-        val x = Instant.ofEpochMilli(timestamps.random()).atZone(ZoneId.systemDefault()).toLocalDate()
+        val x =
+            Instant.ofEpochMilli(timestamps.random()).atZone(ZoneId.systemDefault()).toLocalDate()
         viewModelScope.launch {
             trainingSetRepository.insertTrainingSet(
                 TrainingSet(
@@ -60,7 +74,7 @@ class ExerciseViewModel @Inject constructor(
                     weight = 2.0,
                     notes = "A",
                     date = x,
-                    time = Random.nextInt(0,150),
+                    time = Random.nextInt(0, 150),
                     exercise = Exercise(
                         1,
                         "E1MG1"

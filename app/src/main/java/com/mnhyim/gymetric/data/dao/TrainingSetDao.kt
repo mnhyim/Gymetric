@@ -7,7 +7,6 @@ import androidx.room.Query
 import com.mnhyim.gymetric.data.entity.TrainingSetEntity
 import com.mnhyim.gymetric.data.entity.relation.TrainingSetWithExercise
 import kotlinx.coroutines.flow.Flow
-import java.time.LocalDate
 
 @Dao
 interface TrainingSetDao {
