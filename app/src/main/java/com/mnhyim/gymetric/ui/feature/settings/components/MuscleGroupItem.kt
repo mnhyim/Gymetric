@@ -31,11 +31,14 @@ fun MuscleGroupItem(
         ) {
             Text(
                 text = item.name,
-                style = MaterialTheme.typography.titleMedium,
-                modifier = Modifier.padding(16.dp, 16.dp, 0.dp, 16.dp)
+                style = MaterialTheme.typography.titleSmall,
+                modifier = Modifier
+                    .weight(0.85f)
+                    .padding(16.dp, 16.dp, 0.dp, 16.dp)
             )
             IconButton(
-                onClick = onDelete
+                onClick = onDelete,
+                modifier = Modifier.padding(end = 4.dp)
             ) {
                 Icon(
                     imageVector = Icons.Outlined.Delete,

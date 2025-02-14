@@ -30,14 +30,14 @@ fun AddMuscleGroupDialog(
     Dialog(onDismissRequest = onDismiss) {
         Card {
             Column(
-                modifier = Modifier
+                modifier = modifier
                     .fillMaxWidth()
                     .padding(16.dp),
             ) {
                 Text(
                     text = "Add Category",
                     style = MaterialTheme.typography.titleMedium,
-                    modifier = Modifier
+                    modifier = Modifier.padding(bottom = 16.dp)
                 )
                 OutlinedTextField(
                     value = name,
@@ -50,18 +50,23 @@ fun AddMuscleGroupDialog(
                     singleLine = true,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 16.dp)
+                        .padding(bottom = 8.dp)
                 )
                 Row(
                     horizontalArrangement = Arrangement.End, modifier = Modifier.fillMaxWidth()
                 ) {
-                    TextButton(onClick = onDismiss) {
+                    TextButton(
+                        onClick = onDismiss
+                    ) {
                         Text("Cancel")
                     }
-                    TextButton(onClick = {
-                        onSave(name)
-                        name = ""
-                    }) {
+                    TextButton(
+                        onClick = {
+                            onSave(name)
+                            name = ""
+                        },
+                        enabled = name.isNotBlank()
+                    ) {
                         Text("Add")
                     }
                 }
