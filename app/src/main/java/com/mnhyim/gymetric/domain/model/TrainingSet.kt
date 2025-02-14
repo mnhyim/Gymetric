@@ -4,8 +4,8 @@ import java.time.LocalDate
 
 data class TrainingSet(
 
-    val id: Long,
-    val set: Int,
+    val id: Long = 0,
+    val set: Int = 0,
     val reps: Int,
     val weight: Double,
     val notes: String? = "",

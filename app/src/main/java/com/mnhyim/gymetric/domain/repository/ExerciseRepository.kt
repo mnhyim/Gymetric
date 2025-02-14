@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface ExerciseRepository {
 
-    fun getAllExercise(): Flow<List<Exercise>>
+    fun getAllExercises(): Flow<List<Exercise>>
     fun getAllExercisesByMuscleGroup(): Flow<List<ExercisesByMuscleGroup>>
     suspend fun insertExercise(exercise: Exercise, muscleGroupId: Long)
     suspend fun deleteExercise(exercise: Exercise, muscleGroupId: Long)

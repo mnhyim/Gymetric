@@ -5,29 +5,39 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableDoubleStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.mnhyim.gymetric.domain.model.Exercise
 import com.mnhyim.gymetric.domain.model.MuscleGroup
+import com.mnhyim.gymetric.domain.model.TrainingSet
 import com.mnhyim.gymetric.ui.components.CustomDropDown
+import java.time.LocalDate
+import java.time.LocalTime
 
 @Composable
 fun AddSetDialog(
     muscleGroups: List<MuscleGroup>,
     exercises: List<Exercise>,
     onDismiss: () -> Unit,
+    onAddSet: (TrainingSet) -> Unit,
+    getExercises: (Long) -> Unit,
     modifier: Modifier = Modifier
 ) {
     var selectedMuscleGroupId by remember { mutableLongStateOf(-1) }
@@ -37,11 +47,15 @@ fun AddSetDialog(
     var setWeight by remember { mutableStateOf("") }
     var setNotes by remember { mutableStateOf("") }
 
+    LaunchedEffect(selectedMuscleGroupId) {
+        getExercises(selectedMuscleGroupId)
+    }
+
     Dialog(
         onDismissRequest = onDismiss,
     ) {
         Card(
-            modifier = Modifier.fillMaxWidth()
+            modifier = modifier.fillMaxWidth()
         ) {
             Column(
                 modifier = Modifier.padding(16.dp)
@@ -57,7 +71,9 @@ fun AddSetDialog(
                     selectedItemId = selectedMuscleGroupId,
                     getItemId = { it.id },
                     getItemName = { it.name },
-                    onSelect = { selectedMuscleGroupId = it },
+                    onSelect = {
+                        selectedMuscleGroupId = it
+                    },
                     modifier = Modifier.padding(bottom = 8.dp),
                     label = {
                         Text(
@@ -95,6 +111,7 @@ fun AddSetDialog(
                             )
                         },
                         singleLine = true,
+                        keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
                         modifier = Modifier
                             .fillMaxWidth(0.5f)
                             .padding(end = 8.dp)
@@ -109,6 +126,7 @@ fun AddSetDialog(
                             )
                         },
                         singleLine = true,
+                        keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Decimal),
                         modifier = Modifier.fillMaxWidth(1f)
                     )
                 }
@@ -136,7 +154,20 @@ fun AddSetDialog(
                     TextButton(onClick = onDismiss) {
                         Text("Cancel")
                     }
-                    TextButton(onClick = { }) {
+                    TextButton(
+                        onClick = {
+                            onAddSet(
+                                TrainingSet(
+                                    reps = setReps.toInt(),
+                                    weight = setWeight.toDouble(),
+                                    notes = setNotes,
+                                    date = LocalDate.now(),
+                                    time = LocalTime.now().toSecondOfDay(),
+                                    exercise = exercises.first { it.exerciseId == selectedExerciseId }
+                                )
+                            )
+                        }
+                    ) {
                         Text("Add")
                     }
                 }

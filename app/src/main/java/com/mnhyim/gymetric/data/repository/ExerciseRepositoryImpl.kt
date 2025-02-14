@@ -14,8 +14,8 @@ class ExerciseRepositoryImpl @Inject constructor(
     private val dao: ExerciseDao
 ) : ExerciseRepository {
 
-    override fun getAllExercise(): Flow<List<Exercise>> {
-        TODO("Not yet implemented")
+    override fun getAllExercises(): Flow<List<Exercise>> {
+        TODO()
     }
 
     override fun getAllExercisesByMuscleGroup(): Flow<List<ExercisesByMuscleGroup>> {

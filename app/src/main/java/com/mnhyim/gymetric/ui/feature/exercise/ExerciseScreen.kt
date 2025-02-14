@@ -25,7 +25,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mnhyim.gymetric.domain.model.Exercise
-import com.mnhyim.gymetric.domain.model.MuscleGroup
 import com.mnhyim.gymetric.domain.model.TrainingSet
 import com.mnhyim.gymetric.ui.feature.exercise.components.AddSetDialog
 import com.mnhyim.gymetric.ui.feature.exercise.components.WeeklyDate
@@ -41,6 +40,9 @@ fun ExerciseScreen(
 
     val trainingSet by viewModel.trainingSet.collectAsStateWithLifecycle()
     val weekDates by viewModel.weekDates.collectAsStateWithLifecycle()
+
+    val muscleGroups by viewModel.muscleGroups.collectAsStateWithLifecycle()
+    val exercises by viewModel.exercises.collectAsStateWithLifecycle()
 
     Scaffold(
         topBar = {
@@ -70,9 +72,11 @@ fun ExerciseScreen(
     ) { innerPadding ->
         if (showDialog) {
             AddSetDialog(
-                muscleGroups = emptyList(),
-                exercises = emptyList(),
+                muscleGroups = muscleGroups,
+                exercises = exercises,
                 onDismiss = { showDialog = false },
+                onAddSet = { viewModel.insert(it) },
+                getExercises = { viewModel.getExercises(it) },
                 modifier = Modifier
             )
         }
