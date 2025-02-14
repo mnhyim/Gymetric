@@ -14,8 +14,6 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableDoubleStateOf
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -103,7 +101,11 @@ fun AddSetDialog(
                 ) {
                     OutlinedTextField(
                         value = setReps,
-                        onValueChange = { setReps = it },
+                        onValueChange = {
+                            if (it.isEmpty() || it.all { it.isDigit() }) {
+                                setReps = if (it.length <= 3) it else setReps
+                            }
+                        },
                         label = {
                             Text(
                                 text = "Reps",
@@ -118,7 +120,11 @@ fun AddSetDialog(
                     )
                     OutlinedTextField(
                         value = setWeight,
-                        onValueChange = { setWeight = it },
+                        onValueChange = {
+                            if (it.isEmpty() || it.toDoubleOrNull() != null) {
+                                setWeight = if (it.length <= 6) it else setWeight
+                            }
+                        },
                         label = {
                             Text(
                                 text = "Weight",
