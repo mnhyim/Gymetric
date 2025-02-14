@@ -12,9 +12,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.mnhyim.gymetric.domain.model.TrainingSet
 
 @Composable
 fun ExerciseSetItem(
+    trainingSet: TrainingSet,
     modifier: Modifier = Modifier
 ) {
     HorizontalDivider(thickness = 0.dp)
@@ -32,19 +34,19 @@ fun ExerciseSetItem(
             modifier = Modifier.weight(0.5f)
         )
         Text(
-            text = "16",
+            text = "${trainingSet.reps}",
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.bodySmall,
             modifier = Modifier.weight(1f)
         )
         Text(
-            text = "20 kg",
+            text = "${trainingSet.weight}",
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.bodySmall,
             modifier = Modifier.weight(1f)
         )
         Text(
-            text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor.",
+            text = "${trainingSet.notes}",
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.bodySmall,
             modifier = Modifier

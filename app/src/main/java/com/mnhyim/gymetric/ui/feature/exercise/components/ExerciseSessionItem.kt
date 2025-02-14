@@ -20,18 +20,25 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.mnhyim.gymetric.domain.model.Exercise
+import com.mnhyim.gymetric.domain.model.TrainingSet
 
 @Composable
 fun ExerciseSessionItem(
-    expanded: Boolean,
-    onExpand: () -> Unit,
+    trainingSet: Map.Entry<Exercise, List<TrainingSet>>,
     modifier: Modifier = Modifier
 ) {
+    var expanded by remember { mutableStateOf(false) }
+
     OutlinedCard(
         colors = CardDefaults.outlinedCardColors(
             containerColor = MaterialTheme.colorScheme.surfaceContainerHighest
@@ -57,14 +64,14 @@ fun ExerciseSessionItem(
                         .padding(8.dp, 4.dp)
                 )
                 Text(
-                    text = "Incline Bench Press",
+                    text = trainingSet.key.exerciseName,
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold
                 )
             }
             Spacer(modifier = Modifier.weight(1f))
             IconButton(
-                onClick = onExpand
+                onClick = { expanded = !expanded }
             ) {
                 Icon(
                     imageVector = if (expanded) Icons.Default.KeyboardArrowDown else Icons.Default.KeyboardArrowUp,
@@ -90,8 +97,9 @@ fun ExerciseSessionItem(
                         RoundedCornerShape(8.dp, 8.dp, 0.dp, 0.dp)
                     )
                 )
-                repeat(5) {
+                repeat(trainingSet.value.size) {
                     ExerciseSetItem(
+                        trainingSet = trainingSet.value[it],
                         modifier = Modifier.background(if (it % 2 == 1) MaterialTheme.colorScheme.surfaceContainerLow else Color.Unspecified)
                     )
                 }

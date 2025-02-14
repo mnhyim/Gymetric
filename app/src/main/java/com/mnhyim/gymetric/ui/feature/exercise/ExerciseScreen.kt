@@ -5,11 +5,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -27,6 +27,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mnhyim.gymetric.domain.model.Exercise
 import com.mnhyim.gymetric.domain.model.TrainingSet
 import com.mnhyim.gymetric.ui.feature.exercise.components.AddSetDialog
+import com.mnhyim.gymetric.ui.feature.exercise.components.ExerciseSessionItem
 import com.mnhyim.gymetric.ui.feature.exercise.components.WeeklyDate
 import java.time.LocalDate
 
@@ -95,7 +96,6 @@ private fun ExerciseScreenContent(
     trainingSet: Map<Exercise, List<TrainingSet>>,
     modifier: Modifier = Modifier
 ) {
-    var expanded by remember { mutableStateOf(false) }
 
     Column(
         modifier = modifier
@@ -110,13 +110,10 @@ private fun ExerciseScreenContent(
             verticalArrangement = Arrangement.spacedBy(8.dp),
             modifier = Modifier
         ) {
-            items(count = trainingSet.size) {
-                HorizontalDivider()
-                Text(trainingSet.keys.first().exerciseName)
-                trainingSet.values.first().forEach {
-                    Text("${it.set} - ${it.weight} - ${it.date} - ${it.exercise.exerciseId}")
-                }
-                HorizontalDivider()
+            items(items = trainingSet.entries.toList()) {
+                ExerciseSessionItem(
+                    trainingSet = it,
+                )
             }
         }
     }
