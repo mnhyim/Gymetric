@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -26,8 +25,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mnhyim.gymetric.domain.model.Exercise
+import com.mnhyim.gymetric.domain.model.MuscleGroup
 import com.mnhyim.gymetric.domain.model.TrainingSet
-import com.mnhyim.gymetric.ui.feature.exercise.components.ExerciseSessionItem
+import com.mnhyim.gymetric.ui.feature.exercise.components.AddSetDialog
 import com.mnhyim.gymetric.ui.feature.exercise.components.WeeklyDate
 import java.time.LocalDate
 
@@ -36,14 +36,11 @@ fun ExerciseScreen(
     modifier: Modifier = Modifier,
     viewModel: ExerciseViewModel = hiltViewModel()
 ) {
+    var selectedDate by remember { mutableStateOf<LocalDate>(LocalDate.now()) }
+    var showDialog by remember { mutableStateOf(false) }
+
     val trainingSet by viewModel.trainingSet.collectAsStateWithLifecycle()
     val weekDates by viewModel.weekDates.collectAsStateWithLifecycle()
-    var selectedDate by remember { mutableStateOf<LocalDate>(LocalDate.now()) }
-
-//    LaunchedEffect(selectedDate) {
-//        Log.d("${this::class.simpleName}", "dates:$selectedDate")
-//        Log.d("${this::class.simpleName}", "set:$trainingSet")
-//    }
 
     Scaffold(
         topBar = {
@@ -60,7 +57,7 @@ fun ExerciseScreen(
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { viewModel.insert() },
+                onClick = { showDialog = true },
                 shape = CircleShape
             ) {
                 Icon(
@@ -71,6 +68,14 @@ fun ExerciseScreen(
         },
         modifier = modifier
     ) { innerPadding ->
+        if (showDialog) {
+            AddSetDialog(
+                muscleGroups = emptyList(),
+                exercises = emptyList(),
+                onDismiss = { showDialog = false },
+                modifier = Modifier
+            )
+        }
         ExerciseScreenContent(
             trainingSet = trainingSet,
             modifier = Modifier
