@@ -66,7 +66,10 @@ fun <T> CustomDropDown(
                         text = getItemName(items[itemId]),
                         style = MaterialTheme.typography.titleSmall,
                         modifier = Modifier
-                            .clickable { onSelect(getItemId(items[itemId])) }
+                            .clickable {
+                                onSelect(getItemId(items[itemId]))
+                                isExpanded = false
+                            }
                             .padding(8.dp, 12.dp)
                             .fillMaxWidth()
                     )

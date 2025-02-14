@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.mnhyim.gymetric.domain.model.MuscleGroup
+import com.mnhyim.gymetric.ui.components.CustomDropDown
 
 @Composable
 fun AddExerciseDialog(
@@ -41,13 +42,21 @@ fun AddExerciseDialog(
                     style = MaterialTheme.typography.titleMedium,
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
-                MuscleGroupDropdown(
-                    muscleGroups = muscleGroups,
-                    selectedMuscleGroup = selectedMuscleGroup,
+                CustomDropDown(
+                    items = muscleGroups,
+                    selectedItemId = selectedMuscleGroup,
+                    getItemId = { it.id },
+                    getItemName = { it.name },
                     onSelect = { selectedMuscleGroup = it },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(bottom = 8.dp)
+                        .padding(bottom = 8.dp),
+                    label = {
+                        Text(
+                            text = "Muscle Group",
+                            style = MaterialTheme.typography.bodySmall
+                        )
+                    },
                 )
                 OutlinedTextField(
                     value = exerciseName,

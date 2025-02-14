@@ -87,7 +87,7 @@ fun ManageExerciseScreen(
                 onDismiss = { showModal = false },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(24.dp),
+                    .padding(16.dp),
             )
         }
         ManageExerciseScreenContent(
