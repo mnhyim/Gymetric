@@ -35,7 +35,7 @@ fun AddMuscleGroupDialog(
                     .padding(16.dp),
             ) {
                 Text(
-                    text = "Add Category",
+                    text = "Add Muscle Group",
                     style = MaterialTheme.typography.titleMedium,
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
@@ -44,7 +44,8 @@ fun AddMuscleGroupDialog(
                     onValueChange = { name = it },
                     label = {
                         Text(
-                            text = "Name"
+                            text = "Name",
+                            style = MaterialTheme.typography.bodySmall
                         )
                     },
                     singleLine = true,
@@ -63,7 +64,7 @@ fun AddMuscleGroupDialog(
                     TextButton(
                         onClick = {
                             onSave(name)
-                            name = ""
+                            onDismiss()
                         },
                         enabled = name.isNotBlank()
                     ) {

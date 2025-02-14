@@ -70,21 +70,27 @@ fun AddExerciseDialog(
                     singleLine = true,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(bottom = 16.dp)
+                        .padding(bottom = 8.dp)
                 )
                 Row(
-                    horizontalArrangement = Arrangement.End, modifier = Modifier.fillMaxWidth()
+                    horizontalArrangement = Arrangement.End,
+                    modifier = Modifier.fillMaxWidth()
                 ) {
-                    TextButton(onClick = onDismiss) {
+                    TextButton(
+                        onClick = onDismiss
+                    ) {
                         Text("Cancel")
                     }
-                    TextButton(onClick = {
-                        onSave(
-                            selectedMuscleGroup,
-                            exerciseName,
-                        )
-                        exerciseName = ""
-                    }) {
+                    TextButton(
+                        onClick = {
+                            onSave(
+                                selectedMuscleGroup,
+                                exerciseName,
+                            )
+                            onDismiss()
+                        },
+                        enabled = exerciseName.isNotEmpty() && selectedMuscleGroup != (-1L)
+                    ) {
                         Text("Add")
                     }
                 }
