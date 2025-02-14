@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.getValue
@@ -43,7 +44,8 @@ class MainActivity : ComponentActivity() {
                                         it
                                     )
                                 },
-                                onClick = { navController.navigate(it) }
+                                onClick = { navController.navigate(it) },
+                                modifier = Modifier.navigationBarsPadding()
                             )
                         }
                     },

@@ -18,7 +18,7 @@ fun MainNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Routes.Home,
+        startDestination = Routes.Exercise,
         modifier = modifier
     ) {
         composable<Routes.Home> {

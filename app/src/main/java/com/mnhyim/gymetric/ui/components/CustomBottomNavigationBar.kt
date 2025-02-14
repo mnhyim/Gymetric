@@ -24,10 +24,11 @@ fun CustomBottomNavigationBar(
         shape = RectangleShape,
         colors = CardDefaults.elevatedCardColors(
             containerColor = MaterialTheme.colorScheme.surfaceContainerLowest,
-        )
+        ),
+        modifier = modifier
     ) {
         Row(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 12.dp, horizontal = 8.dp)
         ) {
